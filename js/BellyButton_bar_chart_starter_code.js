@@ -58,14 +58,21 @@ function buildCharts(sample) {
   // 2. Use d3.json to load and retrieve the samples.json file 
   d3.json("samples.json").then((data) => {
     // 3. Create a variable that holds the samples array. 
+    var metadata = data.metadata;
+    
 
     // 4. Create a variable that filters the samples for the object with the desired sample number.
-
+    var sampleArray = metadata.filter(sampleObj => sampleObj.id ==sample); 
+   
     //  5. Create a variable that holds the first sample in the array.
-
+    var result = resultArray[0]; 
 
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
 
+    var userIds = sampleObj.otu_ids
+    var labels = sampleObj.otu_labels
+    var sampVals = sampleObj.sample_values
+    
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
@@ -82,6 +89,6 @@ function buildCharts(sample) {
      
     };
     // 10. Use Plotly to plot the data with the layout. 
-    
+    Plotly.newPlot("plotArea", [bardata], barLayout)
   });
 }
